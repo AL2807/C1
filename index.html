@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test de Autoestima Personalizada</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: #ffffff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0097B2;
+            font-size: 17px;
+        }
+
+        /* Barra de progreso */
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 25px;
+            margin-bottom: 15px;
+            height: 15px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #76c7c0;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Estilos de las preguntas */
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .question p {
+            font-size: 14px;
+            color: #333333;
+        }
+
+        /* Estilos de los botones */
+        .btn-container {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 12px;
+            font-size: 14px;
+            width: 48%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 8px;
+            background-color: #dddddd;
+            color: #333333;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #a6d8ff; /* Color celeste al pasar el cursor */
+        }
+
+        .btn-back {
+            background-color: #cccccc;
+            color: #333333;
+            width: 100%;
+        }
+
+        .btn-back:hover {
+            background-color: #a6d8ff; /* Color celeste al pasar el cursor */
+        }
+
+        /* Estilos del botón de resultado */
+        #result-btn {
+            display: none;
+            width: 100%;
+            background-color: #76c7c0;
+            color: #ffffff;
+            padding: 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        #result-btn:hover {
+            background-color: #5eb0a5;
+        }
+
+        /* Estilos del resultado */
+        #result-message {
+            display: none;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333333;
+            text-align: left;
+        }
+
+        #result-message h2 {
+            text-align: center;
+            color: #76c7c0;
+            margin-bottom: 20px;
+        }
+
+        #result-message .subscale {
+            margin-bottom: 25px;
+        }
+
+        #result-message .subscale h3 {
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        #result-message .subscale p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        #result-message .subscale ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        #result-message .subscale ul li {
+            list-style-type: disc;
+            margin-bottom: 5px;
+        }
+
+        /* Estilos del botón de reinicio */
+        #restart-btn {
+            display: none;
+            width: 100%;
+            background-color: #76c7c0;
+            color: #ffffff;
+            padding: 12px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        #restart-btn:hover {
+            background-color: #5eb0a5;
+        }
+
+        /* Ajustes para dispositivos móviles */
+        @media (max-width: 600px) {
+            .btn {
+                font-size: 14px;
+                padding: 12px;
+                width: 100%;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                margin-bottom: 10px;
+            }
+
+            .btn:last-child {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test de Autoestima Personalizada</h1>
+        <!-- Barra de progreso -->
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <!-- Preguntas -->
+        <div id="question-container">
+            <!-- Aquí van las 45 preguntas, tal como en el código anterior -->
+            <!-- Por brevedad, no se repiten aquí, pero asegúrate de incluirlas todas en tu código -->
+            <!-- Utiliza el código anterior con las 45 preguntas y sus subescalas -->
+            <!-- Asegúrate de que cada pregunta tiene el atributo data-subscale correcto -->
+            <!-- Ejemplo de una pregunta: -->
+            <!-- Pregunta 1 (Autoaceptación) -->
+            <div class="question active" data-question="1" data-subscale="autoaceptacion">
+                <p>1. Me acepto tal como soy, con mis virtudes y defectos.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(1, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(1, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(1, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(1, 1)">Totalmente en desacuerdo</button>
+                </div>
+            </div>
+ <!-- Pregunta 2 (Autoaceptación) -->
+            <div class="question" data-question="2" data-subscale="autoaceptacion">
+                <p>2. Me siento cómodo/a conmigo mismo/a la mayor parte del tiempo.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(2, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(2, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(2, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(2, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(2)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 3 (Autoaceptación) -->
+            <div class="question" data-question="3" data-subscale="autoaceptacion">
+                <p>3. Acepto mis errores y aprendo de ellos.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(3, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(3, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(3, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(3, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(3)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 4 (Autoaceptación) -->
+            <div class="question" data-question="4" data-subscale="autoaceptacion">
+                <p>4. Me trato a mí mismo/a con amabilidad y respeto.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(4, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(4, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(4, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(4, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(4)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 5 (Autoaceptación) -->
+            <div class="question" data-question="5" data-subscale="autoaceptacion">
+                <p>5. Reconozco y valoro mis cualidades positivas.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(5, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(5, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(5, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(5, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(5)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 6 (Autoaceptación) -->
+            <div class="question" data-question="6" data-subscale="autoaceptacion">
+                <p>6. No me critico en exceso cuando cometo un error.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(6, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(6, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(6, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(6, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(6)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 7 (Autoaceptación) -->
+            <div class="question" data-question="7" data-subscale="autoaceptacion">
+                <p>7. Me siento en paz con mi pasado.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(7, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(7, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(7, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(7, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(7)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 8 (Autoaceptación) -->
+            <div class="question" data-question="8" data-subscale="autoaceptacion">
+                <p>8. Me perdono a mí mismo/a por los errores que he cometido.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(8, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(8, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(8, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(8, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(8)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 9 (Autoaceptación) -->
+            <div class="question" data-question="9" data-subscale="autoaceptacion">
+                <p>9. No me comparo constantemente con los demás.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(9, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(9, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(9, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(9, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(9)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 10 (Autoaceptación) -->
+            <div class="question" data-question="10" data-subscale="autoaceptacion">
+                <p>10. Acepto mis emociones, sean positivas o negativas.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(10, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(10, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(10, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(10, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(10)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 11 (Autoaceptación) -->
+            <div class="question" data-question="11" data-subscale="autoaceptacion">
+                <p>11. Me siento merecedor/a de amor y respeto.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(11, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(11, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(11, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(11, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(11)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 12 (Autoaceptación) -->
+            <div class="question" data-question="12" data-subscale="autoaceptacion">
+                <p>12. No busco constantemente la aprobación de los demás.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(12, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(12, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(12, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(12, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(12)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 13 (Autogratitud) -->
+            <div class="question" data-question="13" data-subscale="autogratitud">
+                <p>13. Agradezco las cosas buenas que hay en mi vida.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(13, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(13, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(13, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(13, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(13)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 14 (Autogratitud) -->
+            <div class="question" data-question="14" data-subscale="autogratitud">
+                <p>14. Reconozco y aprecio mis logros personales.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(14, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(14, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(14, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(14, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(14)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 15 (Autogratitud) -->
+            <div class="question" data-question="15" data-subscale="autogratitud">
+                <p>15. Valoro las relaciones positivas en mi vida.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(15, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(15, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(15, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(15, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(15)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 16 (Autogratitud) -->
+            <div class="question" data-question="16" data-subscale="autogratitud">
+                <p>16. Me siento agradecido/a por mis habilidades y talentos.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(16, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(16, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(16, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(16, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(16)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 17 (Autogratitud) -->
+            <div class="question" data-question="17" data-subscale="autogratitud">
+                <p>17. Disfruto de las pequeñas cosas de la vida.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(17, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(17, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(17, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(17, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(17)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 18 (Autogratitud) -->
+            <div class="question" data-question="18" data-subscale="autogratitud">
+                <p>18. Aprecio mi salud y bienestar.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(18, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(18, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(18, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(18, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(18)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 19 (Autogratitud) -->
+            <div class="question" data-question="19" data-subscale="autogratitud">
+                <p>19. Expreso gratitud regularmente.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(19, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(19, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(19, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(19, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(19)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 20 (Autogratitud) -->
+            <div class="question" data-question="20" data-subscale="autogratitud">
+                <p>20. Encuentro cosas por las que estar agradecido/a incluso en situaciones difíciles.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(20, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(20, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(20, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(20, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(20)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 21 (Autogratitud) -->
+            <div class="question" data-question="21" data-subscale="autogratitud">
+                <p>21. Reconozco el apoyo que recibo de los demás.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(21, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(21, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(21, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(21, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(21)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 22 (Autogratitud) -->
+            <div class="question" data-question="22" data-subscale="autogratitud">
+                <p>22. Me siento afortunado/a por las oportunidades que he tenido.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(22, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(22, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(22, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(22, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(22)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 23 (Autogratitud) -->
+            <div class="question" data-question="23" data-subscale="autogratitud">
+                <p>23. Aprecio mi capacidad para superar desafíos.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(23, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(23, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(23, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(23, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(23)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 24 (Autoeficacia) -->
+            <div class="question" data-question="24" data-subscale="autoeficacia">
+                <p>24. Confío en mi capacidad para enfrentar desafíos.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(24, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(24, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(24, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(24, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(24)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 25 (Autoeficacia) -->
+            <div class="question" data-question="25" data-subscale="autoeficacia">
+                <p>25. Creo que puedo lograr mis metas si me lo propongo.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(25, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(25, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(25, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(25, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(25)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 26 (Autoeficacia) -->
+            <div class="question" data-question="26" data-subscale="autoeficacia">
+                <p>26. Manejo bien el estrés y las presiones diarias.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(26, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(26, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(26, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(26, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(26)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 27 (Autoeficacia) -->
+            <div class="question" data-question="27" data-subscale="autoeficacia">
+                <p>27. Soy persistente cuando me enfrento a obstáculos.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(27, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(27, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(27, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(27, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(27)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 28 (Autoeficacia) -->
+            <div class="question" data-question="28" data-subscale="autoeficacia">
+                <p>28. Puedo manejar situaciones inesperadas eficazmente.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(28, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(28, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(28, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(28, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(28)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 29 (Autoeficacia) -->
+            <div class="question" data-question="29" data-subscale="autoeficacia">
+                <p>29. Tengo confianza en mis habilidades para resolver problemas.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(29, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(29, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(29, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(29, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(29)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 30 (Autoeficacia) -->
+            <div class="question" data-question="30" data-subscale="autoeficacia">
+                <p>30. Afronto nuevos retos con entusiasmo.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(30, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(30, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(30, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(30, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(30)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 31 (Autoeficacia) -->
+            <div class="question" data-question="31" data-subscale="autoeficacia">
+                <p>31. Me adapto bien a los cambios.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(31, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(31, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(31, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(31, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(31)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 32 (Autoeficacia) -->
+            <div class="question" data-question="32" data-subscale="autoeficacia">
+                <p>32. Me siento seguro/a al tomar decisiones importantes.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(32, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(32, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(32, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(32, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(32)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 33 (Autoeficacia) -->
+            <div class="question" data-question="33" data-subscale="autoeficacia">
+                <p>33. Creo que puedo influir en lo que sucede en mi vida.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(33, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(33, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(33, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(33, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(33)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 34 (Autoeficacia) -->
+            <div class="question" data-question="34" data-subscale="autoeficacia">
+                <p>34. Me siento capaz de manejar múltiples responsabilidades.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(34, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(34, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(34, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(34, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(34)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 35 (Autoestima General) -->
+            <div class="question" data-question="35" data-subscale="autoestima_general">
+                <p>35. En general, me siento satisfecho/a conmigo mismo/a.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(35, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(35, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(35, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(35, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(35)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 36 (Autoestima General) -->
+            <div class="question" data-question="36" data-subscale="autoestima_general">
+                <p>36. Me considero una persona valiosa.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(36, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(36, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(36, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(36, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(36)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 37 (Autoestima General) -->
+            <div class="question" data-question="37" data-subscale="autoestima_general">
+                <p>37. Tengo una actitud positiva hacia mí mismo/a.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(37, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(37, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(37, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(37, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(37)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 38 (Autoestima General) -->
+            <div class="question" data-question="38" data-subscale="autoestima_general">
+                <p>38. Estoy satisfecho/a con mis capacidades y habilidades.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(38, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(38, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(38, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(38, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(38)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 39 (Autoestima General) -->
+            <div class="question" data-question="39" data-subscale="autoestima_general">
+                <p>39. Me siento orgulloso/a de lo que soy y lo que hago.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(39, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(39, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(39, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(39, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(39)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 40 (Autoestima General) -->
+            <div class="question" data-question="40" data-subscale="autoestima_general">
+                <p>40. Me respeto a mí mismo/a.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(40, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(40, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(40, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(40, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(40)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 41 (Autoestima General) -->
+            <div class="question" data-question="41" data-subscale="autoestima_general">
+                <p>41. Creo que tengo mucho que ofrecer a los demás.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(41, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(41, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(41, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(41, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(41)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 42 (Autoestima General) -->
+            <div class="question" data-question="42" data-subscale="autoestima_general">
+                <p>42. Tengo confianza en mí mismo/a.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(42, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(42, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(42, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(42, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(42)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 43 (Autoestima General) -->
+            <div class="question" data-question="43" data-subscale="autoestima_general">
+                <p>43. Me siento bien conmigo mismo/a.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(43, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(43, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(43, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(43, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(43)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 44 (Autoestima General) -->
+            <div class="question" data-question="44" data-subscale="autoestima_general">
+                <p>44. Me considero una persona exitosa.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(44, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(44, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(44, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(44, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(44)">Atrás</button>
+                </div>
+            </div>
+            <!-- Pregunta 45 (Autoestima General) -->
+            <div class="question" data-question="45" data-subscale="autoestima_general">
+                <p>45. Estoy satisfecho/a con la persona en la que me he convertido.</p>
+                <div class="btn-container">
+                    <button class="btn" onclick="answerQuestion(45, 4)">Totalmente de acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(45, 3)">De acuerdo</button>
+                    <button class="btn" onclick="answerQuestion(45, 2)">En desacuerdo</button>
+                    <button class="btn" onclick="answerQuestion(45, 1)">Totalmente en desacuerdo</button>
+                    <button class="btn btn-back" onclick="goBack(45)">Atrás</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Botón de Ver Resultado -->
+        <button id="result-btn" onclick="showResult()">Ver Resultado</button>
+
+        <!-- Mensaje de Resultado -->
+        <div id="result-message"></div>
+
+        <!-- Botón de Reiniciar -->
+        <button id="restart-btn" onclick="restartQuiz()">Volver a realizar el test</button>
+    </div>
+
+    <script>
+        // Variables globales
+        let currentQuestion = 1;
+        const totalQuestions = 45;
+        let answers = new Array(totalQuestions + 1).fill(0);
+        let subscales = {
+            autoaceptacion: [],
+            autogratitud: [],
+            autoeficacia: [],
+            autoestima_general: []
+        };
+
+        function answerQuestion(questionNumber, score) {
+            // Almacenar respuesta
+            answers[questionNumber] = score;
+
+            // Guardar en la subescala correspondiente
+            const currentQuestionDiv = document.querySelector(`.question[data-question="${questionNumber}"]`);
+            const subscale = currentQuestionDiv.getAttribute('data-subscale');
+            if (!subscales[subscale]) {
+                subscales[subscale] = [];
+            }
+            subscales[subscale].push({ question: questionNumber, score: score });
+
+            // Actualizar barra de progreso
+            updateProgress(questionNumber);
+
+            // Mostrar siguiente pregunta
+            currentQuestionDiv.classList.remove('active');
+
+            currentQuestion++;
+
+            if (currentQuestion <= totalQuestions) {
+                const nextQuestionDiv = document.querySelector(`.question[data-question="${currentQuestion}"]`);
+                nextQuestionDiv.classList.add('active');
+            } else {
+                // Mostrar botón de resultado
+                document.getElementById('result-btn').style.display = 'block';
+                // Ocultar barra de progreso
+                document.querySelector('.progress-bar').style.display = 'none';
+            }
+        }
+
+        function goBack(questionNumber) {
+            // Decrementar contador de pregunta actual
+            currentQuestion = questionNumber - 1;
+
+            // Eliminar la respuesta de la subescala
+            const currentQuestionDiv = document.querySelector(`.question[data-question="${questionNumber}"]`);
+            const subscale = currentQuestionDiv.getAttribute('data-subscale');
+            subscales[subscale] = subscales[subscale].filter(item => item.question !== questionNumber);
+
+            // Mostrar pregunta anterior
+            currentQuestionDiv.classList.remove('active');
+
+            const prevQuestionDiv = document.querySelector(`.question[data-question="${currentQuestion}"]`);
+            prevQuestionDiv.classList.add('active');
+
+            // Actualizar barra de progreso
+            updateProgress(currentQuestion);
+        }
+
+        function updateProgress(questionNumber) {
+            const progress = document.getElementById('progress');
+            const progressPercentage = ((questionNumber - 1) / totalQuestions) * 100;
+            progress.style.width = progressPercentage + '%';
+        }
+
+        function showResult() {
+            // Ocultar preguntas y botón de resultado
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('result-btn').style.display = 'none';
+
+            // Mostrar mensaje de resultado
+            const resultMessageDiv = document.getElementById('result-message');
+            resultMessageDiv.style.display = 'block';
+
+            // Calcular puntajes por subescala
+            let resultHtml = '<h2>Resultados del Test</h2>';
+
+            // Variables para el total general
+            let totalScore = 0;
+            let totalPossibleScore = 0;
+
+            // Definir los mensajes de resultado proporcionados
+           // Definir los mensajes de resultado proporcionados
+        const resultMessages = {
+            autoestima_general: {
+                'Alta': `
+                <!-- Autoestima General: Alta -->
+                <h3>Autoestima General: Alta</h3>
+                <p><strong>Descripción:</strong> Poseer una Alta Autoestima General significa que confías plenamente en tus habilidades y te sientes seguro/a de ti mismo/a en diversas situaciones. Este nivel de autoestima te permite enfrentar desafíos con una actitud positiva y mantener una perspectiva equilibrada ante el éxito y el fracaso. Te valoras a ti mismo/a y reconoces tu propio valor sin necesidad de compararte constantemente con los demás, lo que fortalece tu bienestar emocional y tu capacidad para establecer relaciones saludables.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Seguridad en tus Habilidades: Te sientes competente en lo que haces y tienes la confianza para asumir nuevas responsabilidades.</li>
+                    <li>Resiliencia ante Críticas: Puedes recibir retroalimentación constructiva sin que afecte tu percepción personal, utilizándola para mejorar.</li>
+                    <li>Autenticidad: Te muestras tal como eres, sin máscaras ni pretensiones, lo que fortalece tus relaciones interpersonales.</li>
+                    <li>Proactividad: Buscas activamente oportunidades de crecimiento y desarrollo personal, manteniéndote siempre en movimiento hacia tus metas.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Continúa Desafiándote: Establece metas más ambiciosas y enfrenta nuevos retos que te permitan seguir creciendo y desarrollando tus habilidades.</li>
+                    <li>Mentoría: Comparte tu conocimiento y experiencia con otros que buscan fortalecer su autoestima, convirtiéndote en un modelo a seguir.</li>
+                    <li>Explora Nuevas Pasiones: Dedica tiempo a actividades que te apasionen y que aún no has explorado, ampliando así tu horizonte de habilidades y conocimientos.</li>
+                    <li>Practica la Gratitud: Mantén un diario de gratitud donde reconozcas y aprecies tus logros y cualidades, reforzando tu percepción positiva de ti mismo/a.</li>
+                    <li>Participa en Talleres de Desarrollo Personal: Asiste a talleres o seminarios que te permitan seguir aprendiendo y expandiendo tus capacidades.</li>
+                </ul>
+                `,
+                'Media': `
+                <!-- Autoestima General: Media -->
+                <h3>Autoestima General: Media</h3>
+                <p><strong>Descripción:</strong> Tener una Autoestima General Media indica que, en general, confías en tus habilidades y te sientes seguro/a, pero ocasionalmente puedes experimentar dudas sobre ti mismo/a. Este nivel refleja un equilibrio entre reconocer tus fortalezas y ser consciente de tus áreas de mejora, lo que te permite mantener un enfoque realista y adaptable ante diferentes situaciones. A pesar de ciertas inseguridades, mantienes una base sólida que te permite seguir avanzando hacia una mayor autoconfianza.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Reconocimiento de Logros: Eres capaz de identificar y celebrar tus éxitos, lo que te ayuda a mantener una base sólida de confianza.</li>
+                    <li>Autoconciencia: Tienes una buena comprensión de tus capacidades y limitaciones, lo que te permite trabajar en áreas específicas de mejora.</li>
+                    <li>Flexibilidad: Puedes adaptarte a cambios y desafíos, utilizando tus fortalezas para superar obstáculos.</li>
+                    <li>Motivación Interna: Te impulsa un deseo genuino de mejorar y crecer, lo que te lleva a buscar oportunidades de desarrollo personal.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Refuerza tu Autoestima con Autoafirmaciones Diarias: Practica afirmaciones positivas cada mañana para fortalecer tu confianza y establecer un tono positivo para el día.</li>
+                    <li>Desafía tus Creencias Limitantes: Identifica y cuestiona las creencias negativas que puedan estar afectando tu autoestima, reemplazándolas con pensamientos más realistas y positivos.</li>
+                    <li>Involúcrate en Actividades de Grupo: Participa en actividades comunitarias o grupos de interés que te permitan construir nuevas relaciones y fortalecer tu sentido de pertenencia.</li>
+                    <li>Desarrolla un Proyecto Personal: Emprende un proyecto que te apasione, lo que te ayudará a aumentar tu confianza al ver los resultados de tu esfuerzo y dedicación.</li>
+                    <li>Practica la Reflexión Personal: Dedica tiempo semanalmente para reflexionar sobre tus logros y desafíos, identificando patrones y áreas de mejora.</li>
+                </ul>
+                `,
+                'Baja': `
+                <!-- Autoestima General: Baja -->
+                <h3>Autoestima General: Baja</h3>
+                <p><strong>Descripción:</strong> Tener una Autoestima General Baja significa que tiendes a subestimar tus capacidades y a dudar de ti mismo/a en diversas situaciones. Este nivel de autoestima puede llevarte a sentirte inseguro/a y a tener dificultades para reconocer y valorar tus propios logros. Sin embargo, el reconocimiento de esta área de mejora es el primer paso hacia el fortalecimiento de tu autovaloración y bienestar emocional.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Reconocimiento de la Necesidad de Mejorar: Eres consciente de que tu autoestima necesita fortalecerse, lo que te motiva a buscar ayuda y recursos para el cambio.</li>
+                    <li>Humildad: Tienes una actitud humilde hacia tus habilidades, lo que te permite aprender de tus errores y estar abierto/a a nuevas experiencias.</li>
+                    <li>Empatía: La auto-reflexión puede aumentar tu empatía hacia los demás, permitiéndote construir relaciones más profundas y significativas.</li>
+                    <li>Resiliencia Inicial: Aunque puedes sentirte inseguro/a, tienes la capacidad de enfrentar dificultades y buscar maneras de superarlas.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Trabaja en la Autoafirmación y Rodéate de Personas que te Apoyen: Fortalece tu autoaceptación dedicando tiempo a afirmaciones positivas y buscando la compañía de individuos que te valoren y respalden.</li>
+                    <li>Practica la Autocompasión: Aprende a tratarte con amabilidad y comprensión, reconociendo que todos tenemos imperfecciones y que el crecimiento personal es un proceso continuo.</li>
+                    <li>Participa en Terapia o Grupos de Apoyo: Considera trabajar con un terapeuta o unirte a un grupo de apoyo donde puedas compartir tus experiencias y recibir orientación en tu camino hacia la autoaceptación.</li>
+                    <li>Desarrolla Hábitos de Autocuidado: Implementa rutinas diarias de autocuidado que te permitan nutrir tu cuerpo y mente, promoviendo una mayor aceptación de ti mismo/a.</li>
+                    <li>Establece Metas Pequeñas y Alcanzables: Divide tus objetivos en pasos más manejables, lo que te permitirá experimentar éxito y fortalecer tu confianza poco a poco.</li>
+                    <li>Realiza Actividades que Disfrutes: Dedica tiempo a hobbies y actividades que te hagan sentir bien contigo mismo/a y que te permitan relajarte y recargar energías.</li>
+                </ul>
+                `
+            },
+            autoaceptacion: {
+                'Alta': `
+                <!-- Autoaceptación: Alta -->
+                <h3>Autoaceptación: Alta</h3>
+                <p><strong>Descripción:</strong> Una Alta Autoaceptación indica que aceptas plenamente tus fortalezas y debilidades sin juzgarte duramente. Este nivel de autoaceptación te permite mantener una visión equilibrada de ti mismo/a, tratándote con amabilidad y comprensión. Reconoces que tus limitaciones son parte de tu humanidad y valoras tus habilidades y logros, lo que fortalece tu bienestar emocional y tu capacidad para enfrentar desafíos con resiliencia.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Amabilidad y Comprensión: Te tratas con la misma compasión y empatía que ofrecerías a un amigo, lo que fortalece tu bienestar emocional.</li>
+                    <li>Visión Equilibrada de Ti Mismo/a: Mantienes una percepción realista de tus capacidades y limitaciones, evitando extremos de autoexigencia o autoindulgencia.</li>
+                    <li>Resiliencia Emocional: La autoaceptación te permite manejar mejor el estrés y las adversidades, manteniendo una actitud positiva ante los desafíos.</li>
+                    <li>Autenticidad: Vives de manera auténtica, alineando tus acciones con tus verdaderos valores y creencias.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Mantén esta Visión Equilibrada de Ti Mismo/a: Continúa practicando la autoaceptación manteniendo un diario donde reflejes tanto tus logros como tus desafíos, reconociendo tu crecimiento continuo.</li>
+                    <li>Incorpora Meditación y Mindfulness: Dedica tiempo a la meditación y prácticas de mindfulness para fortalecer tu conexión contigo mismo/a y mantener una actitud de aceptación constante.</li>
+                    <li>Desarrolla un Ritual de Cuidado Personal: Crea hábitos de autocuidado que te permitan nutrir tu cuerpo y mente, reforzando tu autoaceptación a través de prácticas saludables.</li>
+                    <li>Participa en Terapia o Coaching: Considera trabajar con un profesional que te ayude a profundizar en tu autoaceptación y a explorar nuevas formas de auto-respeto y compasión.</li>
+                    <li>Practica el Perdón Personal: Aprende a perdonarte por errores pasados, reconociendo que son parte de tu aprendizaje y crecimiento continuo.</li>
+                    <li>Realiza Actividades Creativas: Participa en actividades artísticas que te permitan expresarte y conectarte con tu esencia, reforzando tu autoaceptación.</li>
+                </ul>
+                `,
+                'Media': `
+                <!-- Autoaceptación: Media -->
+                <h3>Autoaceptación: Media</h3>
+                <p><strong>Descripción:</strong> Tener una Autoaceptación Media significa que luchas con la autoaceptación, pero reconoces y valoras ciertas partes de ti mismo/a. Este nivel refleja una mezcla entre la autocompasión y la autocrítica, donde puedes apreciar tus fortalezas mientras trabajas en aceptar tus debilidades. Aunque enfrentas desafíos en aceptar plenamente quién eres, mantienes una base que te permite avanzar hacia una mayor autoconfianza y bienestar.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Conciencia de tus Fortalezas: Reconoces y valoras tus habilidades y logros, lo que te proporciona una base sólida para el desarrollo personal.</li>
+                    <li>Deseo de Mejorar: Tienes la motivación para trabajar en tu autoaceptación, lo que te lleva a buscar estrategias y herramientas para fortalecerte.</li>
+                    <li>Autocuidado en Proceso: Comienzas a incorporar hábitos de autocuidado que promueven una mayor aceptación de ti mismo/a.</li>
+                    <li>Flexibilidad Emocional: Puedes adaptarte a diferentes situaciones emocionales, aprendiendo a equilibrar la aceptación y el crecimiento.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Practica la Autoaceptación con Ejercicios Diarios: Incorpora actividades diarias como escribir tres cosas que aprecias de ti mismo/a cada día para fortalecer tu autoaceptación.</li>
+                    <li>Utiliza Técnicas de Visualización: Visualiza situaciones en las que te sientes completamente aceptado/a y valorado/a, reforzando tu imagen positiva de ti mismo/a.</li>
+                    <li>Desarrolla la Autocompasión: Aprende a ser más compasivo/a contigo mismo/a mediante la práctica de hablarte de manera amable y comprensiva, especialmente en momentos de dificultad.</li>
+                    <li>Explora tus Creencias Internas: Trabaja en identificar y desafiar las creencias negativas que puedan estar impidiendo tu autoaceptación completa, reemplazándolas con pensamientos más positivos y realistas.</li>
+                    <li>Participa en Actividades de Autoexploración: Realiza ejercicios de autoexploración, como escribir tu historia personal o realizar test de personalidad, para comprender mejor quién eres y qué te hace único/a.</li>
+                    <li>Involúcrate en Terapias de Expresión Emocional: Participa en terapias que fomenten la expresión y aceptación de tus emociones, como la terapia artística o la terapia narrativa.</li>
+                </ul>
+                `,
+                'Baja': `
+                <!-- Autoaceptación: Baja -->
+                <h3>Autoaceptación: Baja</h3>
+                <p><strong>Descripción:</strong> Tener una Autoaceptación Baja significa que te cuesta aceptar quién eres y sueles criticarte a ti mismo/a de manera severa. Este nivel puede llevar a una autoimagen negativa y a una mayor vulnerabilidad emocional, dificultando tu bienestar y desarrollo personal. Sin embargo, el reconocimiento de esta área de mejora es un primer paso importante hacia el fortalecimiento de tu autoaceptación y bienestar emocional.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Deseo de Mejorar: Estás consciente de la necesidad de aceptar más partes de ti mismo/a, lo que te motiva a buscar ayuda y recursos.</li>
+                    <li>Humildad: Tienes una actitud humilde que te permite aprender de tus errores y estar abierto/a a nuevas experiencias.</li>
+                    <li>Motivación para el Cambio: Tu reconocimiento de la falta de autoaceptación te impulsa a trabajar en fortalecer tu autoestima y bienestar emocional.</li>
+                    <li>Resiliencia Potencial: Aunque actualmente puedas sentirte inseguro/a, tienes la capacidad de desarrollar una mayor resiliencia y confianza a través del esfuerzo y la práctica.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Trabaja en la Autoafirmación y Rodéate de Personas que te Apoyen: Fortalece tu autoaceptación dedicando tiempo a afirmaciones positivas y buscando la compañía de individuos que te valoren y respalden.</li>
+                    <li>Practica la Autocompasión: Aprende a tratarte con amabilidad y comprensión, reconociendo que todos tenemos imperfecciones y que el crecimiento personal es un proceso continuo.</li>
+                    <li>Participa en Terapia o Grupos de Apoyo: Considera trabajar con un terapeuta o unirte a un grupo de apoyo donde puedas compartir tus experiencias y recibir orientación en tu camino hacia la autoaceptación.</li>
+                    <li>Desarrolla Hábitos de Autocuidado: Implementa rutinas diarias de autocuidado que te permitan nutrir tu cuerpo y mente, promoviendo una mayor aceptación de ti mismo/a.</li>
+                    <li>Establece Metas Pequeñas y Alcanzables: Divide tus objetivos en pasos más manejables, lo que te permitirá experimentar éxito y fortalecer tu confianza poco a poco.</li>
+                    <li>Realiza Actividades que Disfrutes: Dedica tiempo a hobbies y actividades que te hagan sentir bien contigo mismo/a y que te permitan relajarte y recargar energías.</li>
+                </ul>
+                `
+            },
+            autogratitud: {
+                'Alta': `
+                <!-- Autogratitud: Alta -->
+                <h3>Autogratitud: Alta</h3>
+                <p><strong>Descripción:</strong> Poseer una Alta Autogratitud significa que sientes una profunda gratitud por tus logros y experiencias pasadas. Esta actitud positiva te ayuda a mantener una visión optimista de la vida, reconociendo y valorando las cosas buenas que has vivido y logrado. La autogratitud fortalece tu bienestar emocional y te impulsa a continuar valorando cada aspecto de tu vida, promoviendo una mayor satisfacción y resiliencia ante las adversidades.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Visión Positiva: Tu capacidad para enfocarte en lo positivo te permite mantener una actitud optimista incluso en tiempos difíciles.</li>
+                    <li>Resiliencia Emocional: La gratitud te ayuda a enfrentar adversidades con una perspectiva más fuerte y esperanzadora.</li>
+                    <li>Fortalecimiento de Relaciones: Expresar gratitud hacia los demás fortalece tus relaciones personales y fomenta un ambiente de apoyo mutuo.</li>
+                    <li>Motivación Continua: La apreciación de tus logros y experiencias pasadas te impulsa a seguir adelante y a buscar nuevas oportunidades de crecimiento.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Continúa Practicando la Gratitud Cada Día: Mantén un diario de gratitud donde reconozcas y aprecies tus logros y cualidades, reforzando así tu perspectiva positiva.</li>
+                    <li>Integra la Gratitud en tus Rutinas Diarias: Establece momentos específicos durante el día para reflexionar sobre lo que aprecias, como antes de dormir o al despertar.</li>
+                    <li>Comparte tu Gratitud con Otros: Expresa tu agradecimiento a las personas en tu vida, lo que no solo mejora tus relaciones sino que también refuerza tu propia gratitud.</li>
+                    <li>Crea un Mural de Gratitud: Diseña un espacio visual donde puedas añadir notas, fotos o recordatorios de las cosas por las que te sientes agradecido/a, sirviendo como un constante recordatorio positivo.</li>
+                    <li>Practica la Gratitud Activa: Realiza actos de bondad y generosidad hacia los demás, lo que no solo beneficia a otros sino que también refuerza tu sentido de gratitud.</li>
+                    <li>Participa en Retos de Gratitud: Únete a desafíos de gratitud en redes sociales o comunidades en línea para mantener tu práctica constante y motivada.</li>
+                </ul>
+                `,
+                'Media': `
+                <!-- Autogratitud: Media -->
+                <h3>Autogratitud: Media</h3>
+                <p><strong>Descripción:</strong> Tener una Autogratitud Media indica que, en ocasiones, reconoces y valoras tus logros y experiencias, pero también puedes tender a subestimarlos. Este nivel refleja una mezcla entre apreciación y autoexigencia, donde te sientes agradecido/a por ciertas cosas pero aún trabajas en reconocer plenamente tus esfuerzos y éxitos. Aunque enfrentas desafíos en mantener una práctica constante de gratitud, tienes una base sólida para desarrollar una actitud más agradecida.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Aprecio por lo que Tienes: Eres capaz de reconocer y valorar algunos aspectos positivos de tu vida, lo que contribuye a tu bienestar general.</li>
+                    <li>Reconocimiento Selectivo: Identificas y celebras algunos de tus logros, aunque no siempre de manera consistente.</li>
+                    <li>Base para Crecimiento: Tienes una base sobre la cual puedes construir una mayor autogratitud y apreciación personal.</li>
+                    <li>Motivación para Mejorar: La conciencia de tus logros, aunque parcial, te impulsa a seguir trabajando en tu desarrollo personal.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Enfócate en la Gratitud por las Pequeñas Cosas Diarias: Dedica tiempo a reconocer y agradecer las pequeñas victorias y momentos de tu día a día, lo que puede incrementar tu sensación de bienestar.</li>
+                    <li>Crea Ritual de Gratitud en tus Actividades Cotidianas: Asocia prácticas de gratitud con actividades diarias como comer, caminar o trabajar, para integrar la autogratitud de manera natural.</li>
+                    <li>Utiliza Visualizaciones de Gratitud: Durante momentos de relajación, visualiza y reflexiona sobre las cosas por las que estás agradecido/a, fortaleciendo tu mentalidad positiva.</li>
+                    <li>Participa en Actividades Creativas que Fomenten la Gratitud: Realiza actividades artísticas como pintar, escribir o crear collages que representen las cosas por las que te sientes agradecido/a, ayudando a internalizar tu aprecio.</li>
+                    <li>Establece Recordatorios de Gratitud: Coloca notas o recordatorios en lugares visibles que te inviten a reflexionar sobre lo que agradeces en tu vida.</li>
+                    <li>Involúcrate en la Gratitud Comunitaria: Participa en iniciativas comunitarias que promuevan la gratitud y el reconocimiento mutuo, fortaleciendo tu sentido de pertenencia y apreciación.</li>
+                </ul>
+                `,
+                'Baja': `
+                <!-- Autogratitud: Baja -->
+                <h3>Autogratitud: Baja</h3>
+                <p><strong>Descripción:</strong> Tener una Autogratitud Baja significa que te cuesta reconocer y estar agradecido/a por tus logros o experiencias. Este nivel puede llevar a una visión negativa de ti mismo/a y de tu vida, afectando tu bienestar emocional y tu capacidad para valorar lo positivo que te rodea. Sin embargo, el reconocimiento de esta área de mejora es un paso fundamental hacia el desarrollo de una actitud más agradecida y equilibrada.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Conciencia de la Importancia de la Gratitud: Estás empezando a tomar conciencia de la importancia de la gratitud y su impacto positivo en tu bienestar.</li>
+                    <li>Deseo de Mejorar: Tienes la motivación para trabajar en tu autogratitud, lo que te lleva a buscar formas de incrementar tu apreciación personal.</li>
+                    <li>Apertura al Cambio: Estás dispuesto/a a adoptar nuevas prácticas y hábitos que fomenten una mayor gratitud.</li>
+                    <li>Potencial de Crecimiento: Tienes la capacidad de desarrollar una mayor autogratitud, lo que mejorará tu bienestar y satisfacción personal.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Empieza por Agradecer Algo Pequeño Cada Día: Identifica al menos una cosa pequeña cada día por la que estés agradecido/a, lo que puede ayudarte a desarrollar una práctica de gratitud constante.</li>
+                    <li>Utiliza Aplicaciones de Gratitud: Descarga una aplicación que te recuerde diariamente anotar lo que agradeces, facilitando la integración de la gratitud en tu rutina diaria.</li>
+                    <li>Crea un Espacio de Gratitud en tu Hogar: Designa un lugar donde puedas colocar objetos o notas que representen las cosas por las que estás agradecido/a, sirviendo como un recordatorio visual constante.</li>
+                    <li>Incorpora la Gratitud en tus Relaciones: Expresa tu gratitud hacia las personas en tu vida, fortaleciendo tus relaciones y fomentando un ambiente de apoyo mutuo.</li>
+                    <li>Realiza Actos de Bondad: Dedica tiempo a realizar actos de bondad hacia los demás, lo que no solo beneficia a quienes te rodean, sino que también refuerza tu sentido de gratitud.</li>
+                    <li>Participa en Retos de Gratitud: Únete a desafíos de gratitud en redes sociales o comunidades en línea para mantener tu práctica constante y motivada.</li>
+                </ul>
+                `
+            },
+            autoeficacia: {
+                'Alta': `
+                <!-- Autoeficacia: Alta -->
+                <h3>Autoeficacia: Alta</h3>
+                <p><strong>Descripción:</strong> Una Alta Autoeficacia significa que confías plenamente en tu capacidad para lograr tus metas y superar obstáculos. Esta confianza en tus habilidades te permite enfrentar desafíos con determinación y persistencia, sabiendo que puedes manejar las situaciones que se te presenten. La alta autoeficacia te impulsa a establecer y alcanzar metas ambiciosas, manteniendo una actitud positiva y proactiva ante la vida.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Determinación y Confianza en tus Habilidades: Crees en tu capacidad para lograr lo que te propones, lo que te motiva a tomar acción y persistir ante los desafíos.</li>
+                    <li>Resiliencia ante Obstáculos: Enfrentas las dificultades con una actitud positiva, viendo los obstáculos como oportunidades para aprender y crecer.</li>
+                    <li>Proactividad: Buscas activamente oportunidades para desarrollar tus habilidades y alcanzar tus metas, manteniéndote siempre en movimiento hacia adelante.</li>
+                    <li>Autonomía: Te sientes capaz de tomar decisiones y gestionar tu vida de manera independiente, lo que fortalece tu sentido de control y bienestar.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Sigue Desafiándote con Nuevas Metas: Establece objetivos cada vez más ambiciosos que te permitan seguir desarrollando y demostrando tu capacidad para alcanzarlos.</li>
+                    <li>Busca Mentoría y Coaching: Trabaja con un mentor o coach que te ayude a identificar nuevas oportunidades de crecimiento y a mantener tu motivación y confianza.</li>
+                    <li>Celebra tus Logros: Reconoce y celebra cada uno de tus éxitos, lo que refuerza tu confianza en tus habilidades y te motiva a seguir adelante.</li>
+                    <li>Explora Nuevas Áreas de Interés: Incorpora actividades y proyectos que te apasionen, lo que te permitirá descubrir y desarrollar nuevas habilidades que fortalezcan tu autoeficacia.</li>
+                    <li>Visualiza el Éxito: Practica la visualización de tus metas alcanzadas para fortalecer tu motivación y mantenerte enfocado/a en tus objetivos.</li>
+                    <li>Implementa Técnicas de Gestión del Tiempo: Mejora tu eficiencia y productividad mediante técnicas de gestión del tiempo, lo que te ayudará a alcanzar tus metas de manera más efectiva.</li>
+                </ul>
+                `,
+                'Media': `
+                <!-- Autoeficacia: Media -->
+                <h3>Autoeficacia: Media</h3>
+                <p><strong>Descripción:</strong> Tener una Autoeficacia Media indica que crees en tu capacidad para alcanzar tus metas, pero a veces dudas de ti mismo/a cuando enfrentas desafíos. Este nivel refleja un equilibrio entre la confianza en tus habilidades y la conciencia de tus limitaciones, permitiéndote mantener un enfoque realista y adaptable ante diferentes situaciones. A pesar de ciertas inseguridades, mantienes una base sólida que te permite seguir avanzando hacia una mayor autoconfianza y bienestar.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Capacidad de Logro: Tienes una base sólida de habilidades que te permite alcanzar tus metas, aunque puedas experimentar fluctuaciones en tu confianza.</li>
+                    <li>Autoconciencia: Reconoces tus fortalezas y áreas de mejora, lo que te ayuda a trabajar en tus limitaciones de manera constructiva.</li>
+                    <li>Motivación Interna: Te impulsa un deseo genuino de mejorar y crecer, lo que te lleva a buscar oportunidades de desarrollo personal.</li>
+                    <li>Adaptabilidad: Puedes ajustar tus estrategias y enfoques cuando enfrentas desafíos, manteniéndote flexible y resiliente.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Fija Metas Pequeñas para Aumentar la Confianza: Establece objetivos alcanzables a corto plazo que te permitan experimentar éxito y fortalecer tu confianza en tus capacidades.</li>
+                    <li>Desarrolla un Plan de Acción Detallado: Crea un plan paso a paso para alcanzar tus metas, lo que te ayudará a mantenerte enfocado/a y organizado/a.</li>
+                    <li>Practica la Visualización de Éxito: Dedica tiempo a visualizar tus metas alcanzadas y cómo te sientes al lograrlas, lo que puede aumentar tu motivación y confianza.</li>
+                    <li>Busca Retroalimentación Constructiva: Solicita opiniones de personas de confianza que puedan ofrecerte perspectivas objetivas y sugerencias para mejorar tus habilidades.</li>
+                    <li>Participa en Talleres de Desarrollo Personal: Asiste a talleres o seminarios que te permitan aprender nuevas habilidades y reforzar tu autoeficacia.</li>
+                    <li>Mantén un Diario de Logros: Registra tus éxitos y avances diarios, lo que te permitirá ver tu progreso y reforzar tu confianza en tus capacidades.</li>
+                </ul>
+                `,
+                'Baja': `
+                <!-- Autoeficacia: Baja -->
+                <h3>Autoeficacia: Baja</h3>
+                <p><strong>Descripción:</strong> Tener una Autoeficacia Baja significa que dudas de tu capacidad para superar desafíos y alcanzar tus metas. Este nivel puede llevar a una falta de motivación y a una menor persistencia ante los obstáculos, dificultando tu desarrollo personal y profesional. Sin embargo, reconocer esta área de mejora es un paso fundamental hacia el fortalecimiento de tu confianza y capacidad de logro, permitiéndote trabajar en estrategias que aumenten tu autoeficacia y bienestar.</p>
+                <p><strong>Puntos Fuertes:</strong></p>
+                <ul>
+                    <li>Reconocimiento de esta Área de Mejora: Eres consciente de que necesitas fortalecer tu autoeficacia, lo que te motiva a buscar ayuda y recursos para el cambio.</li>
+                    <li>Humildad: Tienes una actitud humilde que te permite aprender de tus errores y estar abierto/a a nuevas experiencias.</li>
+                    <li>Deseo de Crecer: Tienes la motivación para trabajar en tus habilidades y aumentar tu confianza en ti mismo/a.</li>
+                    <li>Resiliencia Potencial: Aunque actualmente puedas sentirte inseguro/a, tienes la capacidad de desarrollar una mayor resiliencia y confianza a través del esfuerzo y la práctica.</li>
+                </ul>
+                <p><strong>Sugerencias:</strong></p>
+                <ul>
+                    <li>Establece Metas Pequeñas y Celebra Cada Logro para Aumentar la Confianza: Divide tus objetivos en pasos manejables y celebra cada éxito, por pequeño que sea, para fortalecer tu confianza y motivación.</li>
+                    <li>Busca Apoyo y Mentores: Trabaja con un mentor o un grupo de apoyo que te brinde orientación y refuerce tu creencia en tus capacidades.</li>
+                    <li>Desarrolla Habilidades de Autogestión: Aprende técnicas de gestión del tiempo, organización y resolución de problemas que te ayuden a enfrentar desafíos de manera efectiva.</li>
+                    <li>Practica la Autoafirmación: Utiliza afirmaciones positivas para reforzar tu creencia en tus habilidades y potencial, ayudándote a superar la duda y la inseguridad.</li>
+                    <li>Participa en Actividades de Fortalecimiento de Habilidades: Involúcrate en cursos o talleres que te permitan desarrollar y perfeccionar habilidades específicas, aumentando así tu confianza en tu capacidad para lograr tus metas.</li>
+                    <li>Implementa una Rutina de Autoevaluación: Realiza evaluaciones periódicas de tus avances y áreas de mejora, lo que te permitirá ajustar tus estrategias y celebrar tus logros.</li>
+                </ul>
+                `
+            }
+        };
+
+            // Calcular resultados para cada subescala
+            for (let subscale in subscales) {
+                let subscaleScore = subscales[subscale].reduce((total, item) => total + item.score, 0);
+                let subscalePossibleScore = subscales[subscale].length * 4;
+                let percentage = ((subscaleScore / subscalePossibleScore) * 100).toFixed(2);
+
+                totalScore += subscaleScore;
+                totalPossibleScore += subscalePossibleScore;
+
+                let level = '';
+                if (percentage >= 75) {
+                    level = 'Alta';
+                } else if (percentage >= 50) {
+                    level = 'Media';
+                } else {
+                    level = 'Baja';
+                }
+
+                // Obtener el mensaje correspondiente
+                let message = resultMessages[subscale][level];
+
+                resultHtml += `
+                <div class="subscale">
+                    ${message}
+                </div>
+                `;
+            }
+
+            // Mostrar el resumen final si lo deseas
+            resultHtml += `
+            <div class="subscale">
+                <h3>Resumen de Resultados por Escala</h3>
+                <p>Cada una de estas escalas refleja aspectos clave de tu bienestar emocional y psicológico. Independientemente de tu puntuación actual, en CrisisPsic estamos aquí para apoyarte en tu camino hacia el fortalecimiento de tu autoestima, autoaceptación, autogratitud y autoeficacia. Nuestros servicios personalizados están diseñados para ayudarte a desarrollar una visión más positiva y realista de ti mismo/a, mejorar tu bienestar emocional y alcanzar tus metas personales y profesionales.</p>
+                <p><strong>¿Listo para mejorar tu bienestar? ¡Contáctanos hoy mismo y comienza tu transformación hacia una vida más plena y satisfactoria!</strong></p>
+            </div>
+            `;
+
+            resultMessageDiv.innerHTML = resultHtml;
+
+            // Mostrar botón de reinicio
+            document.getElementById('restart-btn').style.display = 'block';
+        }
+
+        function capitalize(text) {
+            return text.charAt(0).toUpperCase() + text.slice(1);
+        }
+
+        function restartQuiz() {
+            // Reiniciar variables
+            currentQuestion = 1;
+            answers = new Array(totalQuestions + 1).fill(0);
+            subscales = {
+                autoaceptacion: [],
+                autogratitud: [],
+                autoeficacia: [],
+                autoestima_general: []
+            };
+
+            // Ocultar resultado y botón de reinicio
+            document.getElementById('result-message').style.display = 'none';
+            document.getElementById('restart-btn').style.display = 'none';
+
+            // Mostrar la primera pregunta
+            document.getElementById('question-container').style.display = 'block';
+            const firstQuestionDiv = document.querySelector(`.question[data-question="1"]`);
+            firstQuestionDiv.classList.add('active');
+
+            // Reiniciar barra de progreso
+            document.querySelector('.progress-bar').style.display = 'block';
+            updateProgress(1);
+        }
+    </script>
+</body>
+</html>
